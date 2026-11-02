@@ -40,8 +40,8 @@ anything it did not save itself may be lost: add a "never sleep" rule for pages 
 ## Develop
 
 ```sh
-node --test tests/     # tests
-./scripts/package.sh   # builds dist/zen-tab-sleep-<version>.zip
+node --test tests/*.test.mjs   # tests
+./scripts/package.sh           # builds dist/zen-tab-sleep-<version>.zip
 ```
 
 Pushing a `v*` tag publishes that zip as a GitHub release. Store texts and images are in [`store/`](store/).
