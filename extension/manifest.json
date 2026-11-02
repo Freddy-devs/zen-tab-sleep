@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "__MSG_nombreExt__",
+  "short_name": "Zen Tab Sleep",
+  "description": "__MSG_descExt__",
+  "version": "2.0.0",
+  "default_locale": "en",
+  "homepage_url": "https://github.com/Freddy-devs/zen-tab-sleep",
+  "minimum_chrome_version": "116",
+  "icons": {
+    "16": "iconos/16.png",
+    "32": "iconos/32.png",
+    "48": "iconos/48.png",
+    "128": "iconos/128.png"
+  },
+  "permissions": [
+    "tabs",
+    "alarms",
+    "storage",
+    "contextMenus"
+  ],
+  "action": {
+    "default_title": "Zen Tab Sleep",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "iconos/16.png",
+      "32": "iconos/32.png"
+    }
+  },
+  "options_ui": {
+    "page": "opciones.html",
+    "open_in_tab": true
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  }
+}
