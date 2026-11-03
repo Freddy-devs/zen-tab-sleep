@@ -3,7 +3,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   alcancesDeUrl, coincide, configInicial, decidir, emparejarVentanas, normalizarMinutos,
-  normalizarPatron, quedoEnBlanco, reglaDeUrl, sanearConfig, sePuedeDescartar, urlsDeVentana,
+  estaDormida, normalizarPatron, quedoEnBlanco, reglaDeUrl, sanearConfig, sePuedeDescartar, urlsDeVentana,
 } from "../extension/reglas.js";
 
 test("solo se descarta una pestaña ya cargada, en segundo plano y en silencio", () => {
@@ -14,6 +14,13 @@ test("solo se descarta una pestaña ya cargada, en segundo plano y en silencio",
   assert.ok(!sePuedeDescartar({ ...lista, active: true }));
   assert.ok(!sePuedeDescartar({ ...lista, audible: true }));
   assert.ok(!sePuedeDescartar({ ...lista, discarded: true }));
+});
+
+test("cuenta como dormida la descartada o sin cargar, salvo la visible", () => {
+  assert.ok(estaDormida({ active: false, discarded: true, status: "unloaded" }));
+  assert.ok(estaDormida({ active: false, discarded: false, status: "unloaded" }));
+  assert.ok(!estaDormida({ active: false, discarded: false, status: "complete" }));
+  assert.ok(!estaDormida({ active: true, discarded: true, status: "unloaded" }));
 });
 
 test("detecta la pestaña visible que no llegó a cargar", () => {

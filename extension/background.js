@@ -7,8 +7,8 @@
 
 import {
   alcancesDeUrl, aplicarRegla, configInicial, decidir, emparejarVentanas, normalizarMinutos,
-  normalizarPatron, quedoEnBlanco, sanearConfig, sanearVentanas, sePuedeDescartar, textoInsignia,
-  textoMinutos, urlsDeVentana, ventanaCaducada, MAX_REGLAS,
+  normalizarPatron, quedoEnBlanco, sanearConfig, sanearVentanas, sePuedeDescartar,
+  estaDormida, textoMinutos, urlsDeVentana, ventanaCaducada, MAX_REGLAS,
 } from "./reglas.js";
 import { t } from "./i18n.js";
 
@@ -154,10 +154,10 @@ async function actualizarIcono() {
   const [config, sesion, ventanas, activas] = await Promise.all([
     leerConfig(), leerSesion(), leerVentanas(), chrome.tabs.query({ active: true }),
   ]);
+  const dormidas = (await chrome.tabs.query({})).filter(estaDormida).length;
+  await chrome.action.setBadgeText({ text: config.activo ? String(dormidas) : "off" }).catch(() => {});
   for (const tab of activas) {
     const decision = deEstaPestana(tab, config, ventanas, sesion);
-    const texto = config.activo ? textoInsignia(decision.minutos) : "off";
-    await chrome.action.setBadgeText({ tabId: tab.id, text: texto }).catch(() => {});
     await chrome.action.setTitle({
       tabId: tab.id,
       title: !config.activo ? t("tituloPausa")
@@ -274,19 +274,32 @@ async function estadoPestana(tabId) {
   };
 }
 
+const datosPestana = t => ({
+  id: t.id,
+  ventanaId: t.windowId,
+  titulo: t.title || "",
+  url: t.url || t.pendingUrl || "",
+});
+
 async function estadoOpciones() {
+  const ahora = Date.now();
   const [config, sesion, ventanas, tabs] = await Promise.all([
     leerConfig(), leerSesion(), leerVentanas(), chrome.tabs.query({}),
   ]);
   const abiertas = new Set(tabs.map(t => t.windowId));
   return {
     config,
-    dormidas: tabs.filter(t => !t.active && (t.discarded || t.status === "unloaded")).map(t => ({
-      id: t.id,
-      ventanaId: t.windowId,
-      titulo: t.title || "",
-      url: t.url || t.pendingUrl || "",
-    })),
+    dormidas: tabs.filter(estaDormida).map(datosPestana),
+    despiertas: tabs.filter(t => !estaDormida(t)).map(t => {
+      const decision = deEstaPestana(t, config, ventanas, sesion);
+      const motivo = !config.activo ? "pausa"
+        : protegida(t, decision, config) || (t.status === "complete" ? null : "cargando");
+      return {
+        ...datosPestana(t),
+        motivo,
+        restanteMs: motivo ? null : Math.max(0, decision.minutos * 60000 - (ahora - inactivoDesde(t, sesion))),
+      };
+    }),
     ventanas: ventanas.map(v => {
       const idVentana = sesion.enlaces[v.id];
       const abierta = abiertas.has(idVentana);
@@ -394,8 +407,10 @@ chrome.tabs.onActivated.addListener(({ tabId, windowId }) => {
 });
 
 chrome.tabs.onUpdated.addListener((_id, cambio) => {
-  if (cambio.url) enCola(actualizarIcono);
+  if (cambio.url || "discarded" in cambio || cambio.status === "unloaded") enCola(actualizarIcono);
 });
+chrome.tabs.onCreated.addListener(() => { enCola(actualizarIcono); });
+chrome.tabs.onRemoved.addListener(() => { enCola(actualizarIcono); });
 chrome.windows.onFocusChanged.addListener(() => { enCola(actualizarIcono); });
 chrome.windows.onRemoved.addListener(idVentana => {
   enCola(async () => {

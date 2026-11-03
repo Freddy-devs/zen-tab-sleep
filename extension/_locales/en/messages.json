@@ -321,5 +321,36 @@
  },
  "sinTitulo": {
   "message": "Untitled"
+ },
+ "despiertas": {
+  "message": "Awake tabs ($V1$)",
+  "placeholders": {
+   "v1": {
+    "content": "$1"
+   }
+  }
+ },
+ "seDuermeEn": {
+  "message": "Sleeps in $V1$",
+  "placeholders": {
+   "v1": {
+    "content": "$1"
+   }
+  }
+ },
+ "seDuermeYa": {
+  "message": "Sleeps at the next check"
+ },
+ "motivoVisible": {
+  "message": "Visible now"
+ },
+ "motivoSonido": {
+  "message": "Playing sound"
+ },
+ "motivoFijada": {
+  "message": "Pinned"
+ },
+ "motivoCargando": {
+  "message": "Still loading"
  }
 }

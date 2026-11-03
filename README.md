@@ -14,7 +14,7 @@ separate timer or exclusion for each page, site or window.
 - **The most specific rule wins:** page or site, then window, then the general time.
 - **Window rules survive restarts:** the rule recognizes its window by its tabs.
 - **Never touched:** the visible tab of each window and tabs playing sound. Pinned tabs too, if you choose.
-- **Quick controls:** the icon shows the current tab's time, and right-clicking it adds shortcuts.
+- **Quick controls:** the icon shows how many tabs are sleeping, and right-clicking it adds shortcuts.
 - **Backup:** export and import your rules as JSON.
 - **Private:** no site access, no analytics, no network requests. Settings stay in your browser. See [PRIVACY.md](PRIVACY.md).
 - English and Spanish.

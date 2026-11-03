@@ -30,7 +30,7 @@ SAVE MEMORY WITHOUT LOSING TABS
 BUILT FOR REAL WORK
 • WhatsApp Web, Microsoft Teams and Outlook start as "never sleep", so you keep your notifications
 • Window rules survive browser restarts
-• See each tab's time on the icon
+• See how many tabs are sleeping on the icon
 • Right-click the icon to exclude a site, exclude a window, sleep other tabs or pause
 • Export and import your rules
 
@@ -65,7 +65,7 @@ AHORRA MEMORIA SIN PERDER PESTAÑAS
 PENSADA PARA TRABAJAR
 • WhatsApp Web, Microsoft Teams y Outlook empiezan en «nunca dormir», para que sigas recibiendo notificaciones
 • Las reglas de ventana sobreviven al reinicio del navegador
-• Mira en el icono el tiempo de cada pestaña
+• Mira en el icono cuántas pestañas están dormidas
 • Con clic derecho en el icono: excluye un sitio o una ventana, duerme las demás pestañas o pausa
 • Exporta e importa tus reglas
 

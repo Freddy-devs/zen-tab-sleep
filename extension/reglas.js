@@ -253,14 +253,6 @@ export function textoMinutos(minutos) {
   return `${Number.isInteger(horas) ? horas : horas.toFixed(1)} h`;
 }
 
-// Lo que cabe en la insignia del icono (máximo 4 caracteres).
-export function textoInsignia(minutos) {
-  if (minutos === null) return "∞";
-  if (minutos < 1) return `${Math.round(minutos * 60)}s`;
-  if (minutos < 60) return String(Math.round(minutos));
-  return `${Math.round(minutos / 60)}h`;
-}
-
 // Descartar una pestaña que aún carga (o la activa) la deja en blanco: el navegador no la recarga al volver.
 export function sePuedeDescartar(tab) {
   return !tab.active && !tab.audible && !tab.discarded && tab.status === "complete";
@@ -268,4 +260,8 @@ export function sePuedeDescartar(tab) {
 
 export function quedoEnBlanco(tab) {
   return !!tab.active && (!!tab.discarded || tab.status === "unloaded");
+}
+
+export function estaDormida(tab) {
+  return !tab.active && (!!tab.discarded || tab.status === "unloaded");
 }

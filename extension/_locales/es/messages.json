@@ -321,5 +321,36 @@
  },
  "sinTitulo": {
   "message": "Sin título"
+ },
+ "despiertas": {
+  "message": "Pestañas despiertas ($V1$)",
+  "placeholders": {
+   "v1": {
+    "content": "$1"
+   }
+  }
+ },
+ "seDuermeEn": {
+  "message": "Se duerme en $V1$",
+  "placeholders": {
+   "v1": {
+    "content": "$1"
+   }
+  }
+ },
+ "seDuermeYa": {
+  "message": "Se duerme en la próxima revisión"
+ },
+ "motivoVisible": {
+  "message": "Visible ahora"
+ },
+ "motivoSonido": {
+  "message": "Con sonido"
+ },
+ "motivoFijada": {
+  "message": "Fijada"
+ },
+ "motivoCargando": {
+  "message": "Todavía cargando"
  }
 }
