@@ -35,7 +35,7 @@ BUILT FOR REAL WORK
 • Export and import your rules
 
 PRIVATE AND OPEN SOURCE
-• No access to page content, no analytics, no network requests
+• Runs only on YouTube, to report AV1 as unsupported; it reads nothing from the page. No analytics, no network requests
 • Your settings stay in your browser
 • MIT-licensed code: https://github.com/Freddy-devs/zen-tab-sleep
 
@@ -70,7 +70,7 @@ PENSADA PARA TRABAJAR
 • Exporta e importa tus reglas
 
 PRIVADA Y DE CÓDIGO ABIERTO
-• Sin acceso al contenido de las páginas, sin analítica y sin peticiones de red
+• Solo actúa en YouTube, para indicar que AV1 no se admite; no lee nada de la página. Sin analítica y sin peticiones de red
 • Tu configuración se queda en tu navegador
 • Código con licencia MIT: https://github.com/Freddy-devs/zen-tab-sleep
 

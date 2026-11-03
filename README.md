@@ -16,7 +16,8 @@ separate timer or exclusion for each page, site or window.
 - **Never touched:** the visible tab of each window and tabs playing sound. Pinned tabs too, if you choose.
 - **Quick controls:** the icon shows how many tabs are sleeping, and right-clicking it adds shortcuts.
 - **Backup:** export and import your rules as JSON.
-- **Private:** no site access, no analytics, no network requests. Settings stay in your browser. See [PRIVACY.md](PRIVACY.md).
+- **YouTube without AV1:** tells YouTube that AV1 is not supported, so it sends VP9, which more GPUs decode in hardware. It runs on every computer and cannot be turned off.
+- **Private:** site access only on YouTube, for that codec check. No analytics, no network requests. Settings stay in your browser. See [PRIVACY.md](PRIVACY.md).
 - English and Spanish.
 
 WhatsApp Web, Microsoft Teams and Outlook start as "never sleep" so you keep getting their

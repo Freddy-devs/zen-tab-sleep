@@ -3,7 +3,8 @@
 **Zen Tab Sleep does not collect, store on any server, sell or share any data.**
 
 - It makes no network requests and has no analytics.
-- It cannot read or change the content of the pages you visit.
+- It reads nothing from the pages you visit. On YouTube only, it runs a small script that reports AV1 as
+  unsupported, so the site sends VP9. It cannot read or change any other site.
 - It reads tab addresses and titles only inside your browser, to apply your rules.
 - Your rules, and the addresses of the tabs in windows that have a rule, are saved with the browser's
   local extension storage. They never leave your device. Removing the extension deletes them.
