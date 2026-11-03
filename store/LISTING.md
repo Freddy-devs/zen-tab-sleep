@@ -23,6 +23,7 @@ SET YOUR OWN RULES
 SAVE MEMORY WITHOUT LOSING TABS
 • Reduce RAM and CPU use with the browser's native tab discarding
 • Sleeping tabs stay in your tab bar and reload when you click them
+• See which tabs are sleeping on the settings page and jump to any of them
 • The visible tab of each window and tabs playing sound are never suspended
 • Optionally keep pinned tabs awake
 
@@ -57,6 +58,7 @@ CREA TUS PROPIAS REGLAS
 AHORRA MEMORIA SIN PERDER PESTAÑAS
 • Reduce el uso de RAM y CPU con el descarte nativo de pestañas del navegador
 • Las pestañas dormidas siguen en tu barra y se recargan al hacer clic
+• Mira en los ajustes qué pestañas están dormidas y salta a cualquiera de ellas
 • Nunca se duerme la pestaña visible de cada ventana ni las que suenan
 • Si quieres, mantén despiertas las pestañas fijadas
 

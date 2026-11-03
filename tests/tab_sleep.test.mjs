@@ -3,8 +3,26 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   alcancesDeUrl, coincide, configInicial, decidir, emparejarVentanas, normalizarMinutos,
-  normalizarPatron, reglaDeUrl, sanearConfig, urlsDeVentana,
+  normalizarPatron, quedoEnBlanco, reglaDeUrl, sanearConfig, sePuedeDescartar, urlsDeVentana,
 } from "../extension/reglas.js";
+
+test("solo se descarta una pestaña ya cargada, en segundo plano y en silencio", () => {
+  const lista = { active: false, audible: false, discarded: false, status: "complete" };
+  assert.ok(sePuedeDescartar(lista));
+  assert.ok(!sePuedeDescartar({ ...lista, status: "loading" }));
+  assert.ok(!sePuedeDescartar({ ...lista, status: "unloaded" }));
+  assert.ok(!sePuedeDescartar({ ...lista, active: true }));
+  assert.ok(!sePuedeDescartar({ ...lista, audible: true }));
+  assert.ok(!sePuedeDescartar({ ...lista, discarded: true }));
+});
+
+test("detecta la pestaña visible que no llegó a cargar", () => {
+  assert.ok(quedoEnBlanco({ active: true, discarded: true, status: "unloaded" }));
+  assert.ok(quedoEnBlanco({ active: true, discarded: false, status: "unloaded" }));
+  assert.ok(!quedoEnBlanco({ active: true, discarded: false, status: "loading" }));
+  assert.ok(!quedoEnBlanco({ active: true, discarded: false, status: "complete" }));
+  assert.ok(!quedoEnBlanco({ active: false, discarded: true, status: "unloaded" }));
+});
 
 test("normaliza direcciones", () => {
   assert.equal(normalizarPatron("HTTPS://WWW.GitHub.com/a/b/?x=1#y"), "github.com/a/b");

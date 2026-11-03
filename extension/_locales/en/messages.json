@@ -287,5 +287,39 @@
  },
  "confirmarReset": {
   "message": "Go back to the default time and rules? Window rules are kept."
+ },
+ "pestanasDormidas": {
+  "message": "Sleeping tabs"
+ },
+ "dormidasAyuda": {
+  "message": "They stay in the tab bar without using memory. A tab reloads when you open it."
+ },
+ "sinDormidas": {
+  "message": "No tabs are sleeping right now."
+ },
+ "irAPestana": {
+  "message": "Go"
+ },
+ "irA": {
+  "message": "Go to $V1$",
+  "placeholders": {
+   "v1": {
+    "content": "$1"
+   }
+  }
+ },
+ "cuentaDormidas": {
+  "message": "$V1$ sleeping",
+  "placeholders": {
+   "v1": {
+    "content": "$1"
+   }
+  }
+ },
+ "unaDormida": {
+  "message": "1 sleeping"
+ },
+ "sinTitulo": {
+  "message": "Untitled"
  }
 }

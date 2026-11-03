@@ -89,8 +89,39 @@ function pintarVentanas(ventanas) {
   }));
 }
 
+function pintarDormidas(dormidas) {
+  $("cuentaDormidas").textContent = dormidas.length === 1 ? t("unaDormida")
+    : dormidas.length ? t("cuentaDormidas", dormidas.length) : "";
+  const lista = $("dormidas");
+  if (!dormidas.length) {
+    lista.replaceChildren(elemento("li", { className: "vacio", textContent: t("sinDormidas") }));
+    return;
+  }
+  lista.replaceChildren(...dormidas.map(pestana => {
+    const titulo = pestana.titulo || pestana.url || t("sinTitulo");
+    const ir = elemento("button", { textContent: t("irAPestana"), ariaLabel: t("irA", titulo) });
+    ir.addEventListener("click", () => ejecutar($("errorGeneral"),
+      () => pedir({ tipo: "irAPestana", tabId: pestana.id, ventanaId: pestana.ventanaId })));
+    return elemento("li", {},
+      elemento("span", { className: "nombre" },
+        titulo,
+        elemento("br"),
+        elemento("small", { className: "tenue", textContent: anfitrion(pestana.url) })),
+      ir);
+  }));
+}
+
+function anfitrion(url) {
+  try {
+    return new URL(url).hostname || url;
+  } catch {
+    return url;
+  }
+}
+
 async function refrescar() {
-  const { config, ventanas } = await pedir({ tipo: "estadoOpciones" });
+  const { config, ventanas, dormidas = [] } = await pedir({ tipo: "estadoOpciones" });
+  pintarDormidas(dormidas);
   $("activo").checked = config.activo;
   $("fijadas").checked = config.respetarFijadas;
   if (document.activeElement !== $("minutos")) $("minutos").value = config.minutos;
@@ -177,5 +208,19 @@ $("restablecer").addEventListener("click", () => {
 chrome.storage.onChanged.addListener((_cambios, area) => {
   if (area === "local") refrescar().catch(error => { $("errorGeneral").textContent = error.message; });
 });
+
+// Las pestañas cambian a ráfagas: se espera a que pase la ráfaga para repintar la lista una vez.
+let pendiente;
+function refrescarPronto() {
+  clearTimeout(pendiente);
+  pendiente = setTimeout(() => refrescar().catch(error => { $("errorGeneral").textContent = error.message; }), 300);
+}
+chrome.tabs.onUpdated.addListener((_id, cambio) => {
+  if ("discarded" in cambio || cambio.status || cambio.title) refrescarPronto();
+});
+chrome.tabs.onCreated.addListener(refrescarPronto);
+chrome.tabs.onRemoved.addListener(refrescarPronto);
+chrome.tabs.onReplaced.addListener(refrescarPronto);
+chrome.tabs.onActivated.addListener(refrescarPronto);
 
 await refrescar().catch(error => { $("errorGeneral").textContent = error.message; });

@@ -3,7 +3,7 @@
   "name": "__MSG_nombreExt__",
   "short_name": "Zen Tab Sleep",
   "description": "__MSG_descExt__",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "default_locale": "en",
   "homepage_url": "https://github.com/Freddy-devs/zen-tab-sleep",
   "minimum_chrome_version": "116",

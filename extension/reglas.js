@@ -260,3 +260,12 @@ export function textoInsignia(minutos) {
   if (minutos < 60) return String(Math.round(minutos));
   return `${Math.round(minutos / 60)}h`;
 }
+
+// Descartar una pestaña que aún carga (o la activa) la deja en blanco: el navegador no la recarga al volver.
+export function sePuedeDescartar(tab) {
+  return !tab.active && !tab.audible && !tab.discarded && tab.status === "complete";
+}
+
+export function quedoEnBlanco(tab) {
+  return !!tab.active && (!!tab.discarded || tab.status === "unloaded");
+}
